@@ -1,1 +1,67 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>My results · QuizHub</title><link rel="stylesheet" href="/css/app.css"></head><body><div th:replace="~{fragments :: nav}"></div><main class="page"><span class="eyebrow">YOUR PROGRESS</span><h1>Previous results</h1><div th:if="${#lists.isEmpty(attempts)}" class="empty"><h3>No attempts yet</h3><p>Take a quiz to see your results here.</p><a class="btn" href="/student">Find quizzes</a></div><div class="history-list"><article class="history-row" th:each="a : ${attempts}"><div><h3 th:text="${a.quiz.title}"></h3><p class="muted" th:text="${a.quiz.subject}"></p></div><strong th:text="${a.score} + '/10'"></strong><a th:href="@{/attempt/{id}(id=${a.id})}">Review →</a></article></div></main></body></html>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>My results · QuizHub</title>
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+    <div th:replace="~{fragments :: nav}"></div>
+
+    <main class="page">
+      <span class="eyebrow">YOUR PROGRESS</span>
+      <h1>Previous results</h1>
+
+      <div th:if="${#lists.isEmpty(history)}" class="empty">
+        <h3>No attempts yet</h3>
+        <p>Take a quiz to see your results here.</p>
+        <a class="btn" href="/student">Find quizzes</a>
+      </div>
+
+      <div class="history-list">
+        <article class="history-row" th:each="a : ${history}">
+          <h3 th:text="${a.quiz.title}">Quiz title</h3>
+
+          <p>
+            Score:
+            <strong>
+              <span th:text="${a.score}">0</span>
+              /
+              <span th:text="${a.totalQuestions}">10</span>
+            </strong>
+          </p>
+
+          <span
+            class="result-status"
+            th:classappend="${a.totalQuestions > 0
+        and a.score * 100.0 / a.totalQuestions >= 60
+        ? ' passed'
+        : ' failed'}"
+            th:text="${a.totalQuestions > 0
+        and a.score * 100.0 / a.totalQuestions >= 60
+        ? 'PASSED'
+        : 'FAILED'}"
+          ></span>
+
+          <p>
+            Submitted:
+            <span
+              th:text="${a.submittedAt != null
+          ? #temporals.format(a.submittedAt, 'yyyy-MM-dd HH:mm')
+          : 'Not available'}"
+              >2026-01-01 12:00</span
+            >
+          </p>
+
+          <a
+            class="btn small"
+            th:href="@{/attempt/{attemptId}(attemptId=${a.id})}"
+          >
+            Review attempt
+          </a>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>

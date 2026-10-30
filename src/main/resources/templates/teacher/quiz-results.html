@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+    <div th:replace="~{fragments :: nav}"></div>
+    <main class="page narrow-wide">
+      <header class="page-header">
+        <div>
+          <p class="muted">Teacher dashboard / Results</p>
+          <h1 th:text="${quiz.title}">Quiz title</h1>
+          <p class="muted">
+            Subject:
+            <strong th:text="${quiz.subject}">Subject</strong>
+          </p>
+        </div>
+
+        <a class="btn secondary" th:href="@{/teacher}"> ← Back to dashboard </a>
+      </header>
+
+      <section class="card">
+        <h2>Student performance</h2>
+        <p class="muted">
+          Highest attempt grade determines the pass/fail status. Passing grade:
+          <strong th:text="${passPercentage + '%'}">60%</strong>
+        </p>
+
+        <div class="table-responsive" th:if="${!#lists.isEmpty(results)}">
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Attempts</th>
+                <th>Highest grade</th>
+                <th>Percentage</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr th:each="result : ${results}">
+                <td>
+                  <strong th:text="${result.studentName}"> Student </strong>
+                </td>
+
+                <td th:text="${result.attempts}">1</td>
+
+                <td>
+                  <strong
+                    th:text="${result.highestScore
+                                + ' / '
+                                + result.totalQuestions}"
+                  >
+                    9 / 10
+                  </strong>
+                </td>
+
+                <td th:text="${result.percentage + '%'}">90%</td>
+
+                <td>
+                  <span class="status-badge pass" th:if="${result.passed}">
+                    Pass
+                  </span>
+
+                  <span class="status-badge fail" th:unless="${result.passed}">
+                    Fail
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="empty-state" th:if="${#lists.isEmpty(results)}">
+          <h3>No results yet</h3>
+          <p>
+            No students have completed this quiz. Results will appear here after
+            their first attempt.
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

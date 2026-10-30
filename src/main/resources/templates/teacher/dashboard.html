@@ -1,1 +1,57 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Teacher dashboard · QuizHub</title><link rel="stylesheet" href="/css/app.css"></head><body><div th:replace="~{fragments :: nav}"></div><main class="page"><div th:replace="~{fragments :: messages}"></div><div class="pagehead"><div><span class="eyebrow">TEACHER SPACE</span><h1>Your quizzes</h1><p>Create a quiz, then publish it when all 10 questions are ready.</p></div><a class="btn" href="/teacher/quizzes/new">＋ Create quiz</a></div><div th:if="${#lists.isEmpty(quizzes)}" class="empty"><h3>Your first quiz starts here.</h3><p>Create a quiz with 10 questions and explanations.</p></div><div class="quiz-grid"><article class="quiz-card" th:each="q : ${quizzes}"><div class="cardtop"><span class="tag" th:text="${q.subject}"></span><span class="status" th:text="${q.status}"></span></div><h3 th:text="${q.title}"></h3><p th:text="${q.description}"></p><p class="muted" th:text="${#lists.size(q.questions)} + ' / 10 questions'"></p><form th:if="${q.status == 'DRAFT'}" th:action="@{/teacher/quizzes/{id}/publish(id=${q.id})}" method="post"><button class="btn small" type="submit">Publish quiz</button></form><span th:if="${q.status == 'PUBLISHED'}" class="published">Visible to students ✓</span></article></div></main></body></html>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Teacher dashboard · QuizHub</title>
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+    <div th:replace="~{fragments :: nav}"></div>
+    <main class="page">
+      <div th:replace="~{fragments :: messages}"></div>
+      <div class="pagehead">
+        <div>
+          <span class="eyebrow">TEACHER SPACE</span>
+          <h1>Your quizzes</h1>
+          <p>Create a quiz, then publish it when all 10 questions are ready.</p>
+        </div>
+        <a class="btn" href="/teacher/quizzes/new">＋ Create quiz</a>
+      </div>
+      <div th:if="${#lists.isEmpty(quizzes)}" class="empty">
+        <h3>Your first quiz starts here.</h3>
+        <p>Create a quiz with 10 questions and explanations.</p>
+      </div>
+      <div class="quiz-grid">
+        <article class="quiz-card" th:each="q : ${quizzes}">
+          <div class="cardtop">
+            <span class="tag" th:text="${q.subject}"></span
+            ><span class="status" th:text="${q.status}"></span>
+          </div>
+          <h3 th:text="${q.title}"></h3>
+          <p th:text="${q.description}"></p>
+          <p
+            class="muted"
+            th:text="${#lists.size(q.questions)} + ' question(s)'"
+          ></p>
+          <form
+            th:if="${q.status == 'DRAFT'}"
+            th:action="@{/teacher/quizzes/{id}/publish(id=${q.id})}"
+            method="post"
+          >
+            <button class="btn small" type="submit">Publish quiz</button>
+          </form>
+          <span th:if="${q.status == 'PUBLISHED'}" class="published"
+            >Visible to students ✓</span
+          >
+          <a
+            class="btn small"
+            th:href="@{/teacher/quizzes/{id}/results(id=${q.id})}"
+          >
+            View Results →
+          </a>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>

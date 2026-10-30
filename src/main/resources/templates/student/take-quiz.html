@@ -1,1 +1,63 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Take quiz · QuizHub</title><link rel="stylesheet" href="/css/app.css"></head><body><div th:replace="~{fragments :: nav}"></div><main class="page narrow-wide"><a class="back" href="/student">← All quizzes</a><span class="eyebrow" th:text="${quiz.subject}"></span><h1 th:text="${quiz.title}"></h1><p th:text="${quiz.description}"></p><div class="notice">Answer all 10 questions. Your score and explanations appear after submission.</div><form method="post" th:action="@{/student/quizzes/{id}/submit(id=${quiz.id})}" class="stack" id="quizForm"><fieldset class="question-block" th:each="q,stat : ${quiz.questions}"><legend th:text="'Question ' + ${stat.count}"></legend><h3 th:text="${q.questionText}"></h3><label class="choice"><input type="radio" th:name="'q'+${q.id}" value="A" required><span th:text="${q.optionA}"></span></label><label class="choice"><input type="radio" th:name="'q'+${q.id}" value="B" required><span th:text="${q.optionB}"></span></label><label class="choice"><input type="radio" th:name="'q'+${q.id}" value="C" required><span th:text="${q.optionC}"></span></label><label class="choice"><input type="radio" th:name="'q'+${q.id}" value="D" required><span th:text="${q.optionD}"></span></label></fieldset><div class="form-footer"><span class="muted">Check your answers before submitting.</span><button class="btn" type="submit">Submit answers</button></div></form></main></body></html>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Take quiz · QuizHub</title>
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+    <div th:replace="~{fragments :: nav}"></div>
+    <main class="page narrow-wide">
+      <a class="back" href="/student">← All quizzes</a
+      ><span class="eyebrow" th:text="${quiz.subject}"></span>
+      <h1 th:text="${quiz.title}"></h1>
+      <p th:text="${quiz.description}"></p>
+      <div
+        class="notice"
+        th:text="'Answer all ' + ${quiz.questions.size()} +
+              ' questions. Your score and explanations appear after submission.'"
+      ></div>
+      <form
+        method="post"
+        th:action="@{/student/quizzes/{id}/submit(id=${quiz.id})}"
+        class="stack"
+        id="quizForm"
+      >
+        <fieldset class="question-block" th:each="q,stat : ${quiz.questions}">
+          <legend th:text="'Question ' + ${stat.count}"></legend>
+          <h3 th:text="${q.questionText}"></h3>
+          <label class="choice"
+            ><input
+              type="radio"
+              th:name="'q'+${q.id}"
+              value="A"
+              required /><span th:text="${q.optionA}"></span></label
+          ><label class="choice"
+            ><input
+              type="radio"
+              th:name="'q'+${q.id}"
+              value="B"
+              required /><span th:text="${q.optionB}"></span></label
+          ><label class="choice"
+            ><input
+              type="radio"
+              th:name="'q'+${q.id}"
+              value="C"
+              required /><span th:text="${q.optionC}"></span></label
+          ><label class="choice"
+            ><input
+              type="radio"
+              th:name="'q'+${q.id}"
+              value="D"
+              required /><span th:text="${q.optionD}"></span
+          ></label>
+        </fieldset>
+        <div class="form-footer">
+          <span class="muted">Check your answers before submitting.</span
+          ><button class="btn" type="submit">Submit answers</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

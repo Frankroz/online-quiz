@@ -12,10 +12,10 @@ public class QuizAttempt {
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "student_id", nullable = false) private User student;
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "quiz_id", nullable = false) private Quiz quiz;
     @Column(nullable = false) private int score;
-    @Column(name = "total_questions", nullable = false) private int totalQuestions = 10;
+    @Column(name = "total_questions", nullable = false) private int totalQuestions;
     @Column(name = "submitted_at", insertable = false, updatable = false) private LocalDateTime submittedAt;
     protected QuizAttempt() {}
-    public QuizAttempt(User student, Quiz quiz, int score) { this.student=student; this.quiz=quiz; this.score=score; }
+    public QuizAttempt(User student, Quiz quiz, int score, int totalQuestions) { this.student=student; this.quiz=quiz; this.score=score; this.totalQuestions = quiz.getQuestions().size();}
     public Long getId() { return id; }
     public User getStudent() { return student; }
     public Quiz getQuiz() { return quiz; }

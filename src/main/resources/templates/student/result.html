@@ -1,1 +1,69 @@
-<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your result · QuizHub</title><link rel="stylesheet" href="/css/app.css"></head><body><div th:replace="~{fragments :: nav}"></div><main class="page narrow-wide"><span class="eyebrow">QUIZ COMPLETE</span><h1 th:text="${quiz.title}"></h1><section class="score-panel"><span class="score" th:text="${attempt.score} + '/10'"></span><p th:text="${attempt.score >= 7 ? 'Great work — keep it up!' : 'Keep practicing. Review the explanations below.'}"></p><a class="btn small" href="/student">Find another quiz</a></section><h2>Review your answers</h2><article class="review-card" th:each="q,stat : ${quiz.questions}"><div class="review-heading"><span class="tag" th:text="'Question ' + ${stat.count}"></span><span th:if="${selectedByQuestion[q.id] == q.correctOption}" class="correct">Correct ✓</span><span th:unless="${selectedByQuestion[q.id] == q.correctOption}" class="incorrect">Incorrect</span></div><h3 th:text="${q.questionText}"></h3><p>Your answer: <strong th:text="${selectedByQuestion[q.id] + '. ' + q.optionText(selectedByQuestion[q.id])}"></strong></p><p>Correct answer: <strong th:text="${q.correctOption + '. ' + q.optionText(q.correctOption)}"></strong></p><p class="explanation" th:text="${q.explanation}"></p></article></main></body></html>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Your result · QuizHub</title>
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+    <div th:replace="~{fragments :: nav}"></div>
+    <main class="page narrow-wide">
+      <span class="eyebrow">QUIZ COMPLETE</span>
+      <h1 th:text="${quiz.title}"></h1>
+      <section class="score-panel">
+        <span
+          class="score"
+          th:text="${attempt.score} + '/' + ${attempt.totalQuestions}"
+        ></span>
+
+        <span
+          class="result-status"
+          th:classappend="${attempt.score * 100.0 / attempt.totalQuestions >= 70
+      ? ' passed'
+      : ' failed'}"
+          th:text="${attempt.score * 100.0 / attempt.totalQuestions >= 70
+      ? 'PASSED'
+      : 'FAILED'}"
+        ></span>
+
+        <p
+          th:text="${attempt.score * 100.0 / attempt.totalQuestions >= 70
+      ? 'Great work — you passed the quiz!'
+      : 'You did not pass this time. Review the explanations below and keep practicing.'}"
+        ></p>
+
+        <a class="btn small" href="/student">Find another quiz</a>
+      </section>
+      <h2>Review your answers</h2>
+      <article class="review-card" th:each="q,stat : ${quiz.questions}">
+        <div class="review-heading">
+          <span class="tag" th:text="'Question ' + ${stat.count}"></span
+          ><span
+            th:if="${selectedByQuestion[q.id] == q.correctOption}"
+            class="correct"
+            >Correct ✓</span
+          ><span
+            th:unless="${selectedByQuestion[q.id] == q.correctOption}"
+            class="incorrect"
+            >Incorrect</span
+          >
+        </div>
+        <h3 th:text="${q.questionText}"></h3>
+        <p>
+          Your answer:
+          <strong
+            th:text="${selectedByQuestion[q.id] + '. ' + q.optionText(selectedByQuestion[q.id])}"
+          ></strong>
+        </p>
+        <p>
+          Correct answer:
+          <strong
+            th:text="${q.correctOption + '. ' + q.optionText(q.correctOption)}"
+          ></strong>
+        </p>
+        <p class="explanation" th:text="${q.explanation}"></p>
+      </article>
+    </main>
+  </body>
+</html>
