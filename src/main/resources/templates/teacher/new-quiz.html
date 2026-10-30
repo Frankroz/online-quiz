@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Create quiz · QuizHub</title><link rel="stylesheet" href="/css/app.css"></head><body><div th:replace="~{fragments :: nav}"></div><main class="page narrow-wide"><div th:replace="~{fragments :: messages}"></div><a class="back" href="/teacher">← Back to dashboard</a><span class="eyebrow">QUIZ BUILDER</span><h1>Create a quiz</h1><p>Complete every field. Your quiz will be saved as a draft until you publish it.</p><form method="post" th:action="@{/teacher/quizzes}" class="stack"><section class="panel"><label>Quiz title<input name="title" maxlength="100" required></label><label>Subject<input name="subject" maxlength="50" required placeholder="e.g. Biology"></label><label>Description<textarea name="description" rows="3" required></textarea></label></section>
+<fieldset class="question-block"><legend>Question 1</legend>
+<label>Question text<textarea name="q1" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a1" required maxlength="255"></label><label>Option B<input name="b1" required maxlength="255"></label><label>Option C<input name="c1" required maxlength="255"></label><label>Option D<input name="d1" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct1" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation1" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<fieldset class="question-block"><legend>Question 2</legend>
+<label>Question text<textarea name="q2" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a2" required maxlength="255"></label><label>Option B<input name="b2" required maxlength="255"></label><label>Option C<input name="c2" required maxlength="255"></label><label>Option D<input name="d2" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct2" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation2" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<fieldset class="question-block"><legend>Question 3</legend>
+<label>Question text<textarea name="q3" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a3" required maxlength="255"></label><label>Option B<input name="b3" required maxlength="255"></label><label>Option C<input name="c3" required maxlength="255"></label><label>Option D<input name="d3" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct3" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation3" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<fieldset class="question-block"><legend>Question 4</legend>
+<label>Question text<textarea name="q4" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a4" required maxlength="255"></label><label>Option B<input name="b4" required maxlength="255"></label><label>Option C<input name="c4" required maxlength="255"></label><label>Option D<input name="d4" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct4" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation4" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<fieldset class="question-block"><legend>Question 5</legend>
+<label>Question text<textarea name="q5" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a5" required maxlength="255"></label><label>Option B<input name="b5" required maxlength="255"></label><label>Option C<input name="c5" required maxlength="255"></label><label>Option D<input name="d5" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct5" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation5" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<fieldset class="question-block"><legend>Question 6</legend>
+<label>Question text<textarea name="q6" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a6" required maxlength="255"></label><label>Option B<input name="b6" required maxlength="255"></label><label>Option C<input name="c6" required maxlength="255"></label><label>Option D<input name="d6" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct6" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation6" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<fieldset class="question-block"><legend>Question 7</legend>
+<label>Question text<textarea name="q7" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a7" required maxlength="255"></label><label>Option B<input name="b7" required maxlength="255"></label><label>Option C<input name="c7" required maxlength="255"></label><label>Option D<input name="d7" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct7" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation7" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<fieldset class="question-block"><legend>Question 8</legend>
+<label>Question text<textarea name="q8" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a8" required maxlength="255"></label><label>Option B<input name="b8" required maxlength="255"></label><label>Option C<input name="c8" required maxlength="255"></label><label>Option D<input name="d8" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct8" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation8" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<fieldset class="question-block"><legend>Question 9</legend>
+<label>Question text<textarea name="q9" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a9" required maxlength="255"></label><label>Option B<input name="b9" required maxlength="255"></label><label>Option C<input name="c9" required maxlength="255"></label><label>Option D<input name="d9" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct9" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation9" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<fieldset class="question-block"><legend>Question 10</legend>
+<label>Question text<textarea name="q10" required rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a10" required maxlength="255"></label><label>Option B<input name="b10" required maxlength="255"></label><label>Option C<input name="c10" required maxlength="255"></label><label>Option D<input name="d10" required maxlength="255"></label></div>
+<label>Correct answer<select name="correct10" required><option value="">Choose answer</option><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Explanation<textarea name="explanation10" required rows="2" placeholder="Explain why the answer is correct"></textarea></label></fieldset>
+<div class="form-footer"><span class="muted">10 questions required · Four options each</span><button class="btn" type="submit">Save draft</button></div></form></main></body></html>

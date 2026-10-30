@@ -1,0 +1,10 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><body>
+<header th:fragment="nav" class="nav"><a class="brand" href="/">QuizHub</a><nav>
+<a href="/teacher" sec:authorize="hasRole('TEACHER')">Teacher dashboard</a>
+<a href="/student" sec:authorize="hasRole('STUDENT')">Find quizzes</a>
+<a href="/student/history" sec:authorize="hasRole('STUDENT')">My results</a>
+<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()"><button class="linkbutton" type="submit">Log out</button></form>
+<a href="/login" sec:authorize="!isAuthenticated()">Log in</a><a href="/register" sec:authorize="!isAuthenticated()">Register</a>
+</nav></header>
+<div th:fragment="messages" class="messages"><p class="success" th:if="${message}" th:text="${message}"></p><p class="error" th:if="${error}" th:text="${error}"></p></div>
+</body></html>
